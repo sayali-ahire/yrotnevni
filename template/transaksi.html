@@ -1,0 +1,292 @@
+<div class="cover" ng-controller="CartController">
+	<!--<div class="container">
+		<h1>Inventori Apps</h1>
+		<hr>
+		<div class="row">
+			<div class="col-md-7">
+				<div class="col-md-8">
+					<div class="form-group">
+						<label for="">Search Your items</label>
+						<input type="text" class="form-control" ng-model="search" placeholder="Enter Keywords Here...">
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="">Showing items</label>
+						<select name="" id="" ng-model="pageSize" ng-init="pageSize" class="form-control" ng-options="p.showPage as p.showPage for p in sizePaging">						
+						</select>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<table class="table table-striped">
+						<tr>
+							<th>#</th>
+							<th>Nama Produk</th>
+							<th>Harga Satuan</th>
+							<th>Stok</th>
+							<th></th>
+						</tr>
+
+						<tr dir-paginate="d in data | filter:search | itemsPerPage: pageSize " current-page="currentPage">
+							<td>{{ d.idproduk }}</td>
+							<td>{{ d.nama_produk }}</td>
+							<td>{{ d.harga | currency:"Rp ":0 }}</td>
+							<td>{{ d.stok }}</td>
+							<td>
+								<a class="btn btn-default" ng-click="ngCart.addItem(d.idproduk, d.nama_produk, d.harga, 1, item)" ng-disabled="ngCart.getItemById(d.idproduk) || d.stok == 0"> 
+						        	<span ng-if="d.stok > 0"><i class="fa fa-cart-plus"></i> Buy </span>
+						        	<span ng-if="d.stok == 0"><i class="fa fa-close"></i> Out of Stock</span>
+						        </a>
+							</td>
+						</tr>
+					</table>
+					<dir-pagination-controls class="pull-right" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="template/paging/dirPagination.tpl.html"></dir-pagination-controls>
+				</div>
+				<div class="container-fluid" align="center" ng-if="loader">
+					<img src="images/loader.gif" alt="" style="display:inline-block; width:50px;">
+				</div>
+			</div>
+			<div class="col-md-5">
+				<h3>Kalkulasi Pembelanjaan</h3>
+				<p>You have <b>{{ ngCart.getTotalItems() }} <ng-pluralize count="ngCart.getTotalItems()" when="{1: 'item', 'other':'items'}"></ng-pluralize></b>					to be count</p>
+				<table class="table">
+					<tr>
+						<th>Nama Produk</th>
+						<th>Harga</th>
+						<th>Quantity</th>
+						<th>Subtotal</th>
+						<th></th>
+					</tr>
+					<tr>
+						<td colspan="5" align="center" ng-show="ngCart.getTotalItems() === 0">You Haven't Selected item</td>
+					</tr>
+					<tr ng-repeat="item in ngCart.getCart().items track by $index">
+						<td>{{ item.getName() }}</td>
+						<td>{{ item.getPrice() | currency:"Rp ":0 }}</td>
+						<td><input type="number" class="form-control" ng-model="quan[$index]" value="{{ item.getQuantity() | number }}" style="width:60px;"
+								ng-change="item.setQuantity(quan[$index])"></td>
+						<td>{{ item.getTotal() | currency:"Rp ":0 }}</td>
+						<td><button class="btn btn-default" ng-click="ngCart.removeItemById(item.getId())"><i class="fa fa-close"></i></button></td>
+					</tr>
+
+					<tr>
+						<th></th>
+						<th></th>
+						<th>Total</th>
+						<td>{{ ngCart.totalCost() | currency:"Rp ":0 }}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td colspan="3">
+							<input type="text" placeholder="Enter Payment" class="form-control" ng-model="ngCart.bayar" ng-model-options="{updateOn : 'change blur'}"
+								format="currency" ng-disabled="ngCart.getTotalItems() == 0">
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<th></th>
+						<th>Kembalian</th>
+						<td>{{ ngCart.kembali() | currency:"Rp ":0}}</td>
+						<td></td>
+					</tr>
+				</table>
+				<ngcart-checkout service="http" settings="{ url:'http://localhost/inventoryApp/server/checkout.php' }"></ngcart-checkout>
+			</div>
+			<div class="container-fluid">
+			</div>
+		</div>
+	</div>-->
+
+	<div class="container">
+		<div class="col-md-12">
+			<h1>Kelvin 77</h1>
+			<hr>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="">Mobile No</label>
+							<input type="text" class="form-control" ng-model="MobileNo" placeholder="Mobile No">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="">First Name</label>
+							<input type="text" class="form-control" ng-model="FirstName" placeholder="First Name">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="">Last Name</label>
+							<input type="text" class="form-control" ng-model="LastName" placeholder="Last Name">
+						</div>
+					</div>
+
+				</div>
+
+
+
+				<!--<h3>Ice Cream Parlour</h3>-->
+				<!--<p>You have <b>{{ ngCart.getTotalItems() }} <ng-pluralize count="ngCart.getTotalItems()" when="{1: 'item', 'other':'items'}"></ng-pluralize></b>			to be count</p>-->
+				<table class="table table-striped">
+					<tr>
+						<th class="col-md-3">Product</th>
+						<th class="col-md-1">Price</th>
+						<!--<th class="col-md-1">Base</th>-->
+						<th class="col-md-1">Quantity</th>
+						<th class="col-md-1">Subtotal</th>
+						<th class="col-md-1">Remove</th>
+
+					</tr>
+
+					<tr ng-repeat="selected in selectedProdcuts track by $index">
+						<td class="col-md-3">
+							<input placeholder="Enter Keywords Here..." type="text" required ng-model="selected.product" typeahead-editable="false" typeahead-on-select="onSelect($item, $model, $label,$index)"
+								uib-typeahead="allProduct.nama_produk for allProduct in allProducts | filter:$viewValue | limitTo:8" class="form-control"
+								typeahead-min-length="0" typeahead-no-results="noResults" typeahead-wait-ms=10 ng-change="ClearData(selected,$index)">
+							<span ng-if="noResults" uib-dropdown uib-dropdown-toggle auto-close="disabled" is-open="true">
+						<ul class="uib-dropdown-menu" >
+							<li><a href>no results</a></li>
+						</ul>
+    				</span>
+						</td>
+
+						<td class="col-md-1"><input type="text" class="form-control" ng-model="selected.price" ng-change="setSubtotal(selected.quantity,$index)"></td>
+						<!--<td><select  class="form-control" name="repeatSelect" id="repeatSelect" ng-model="selected.base_selected">
+						  <option  ng-repeat="option in base"  value="{{option.id}}">{{option.inventory_name}}</option>
+						</select></td>-->
+						<td class="col-md-1"><input type="number" class="form-control" ng-model="selected.quantity" ng-change="setSubtotal(selected.quantity,$index)"></td>
+						<td class="col-md-1">{{selected.subTotal}}</td>
+						<td class="col-md-1"><button class="btn btn-default" ng-click="removeItemById($index)"><i class="fa fa-close"></i></button></td>
+
+					</tr>
+					<tr>
+						<th><button class="btn btn-primary" ng-click="add()">Add Row</button></th>
+						<th></th>
+						<th>Total</th>
+						<td>{{ grandTotal | currency:"Rp ":0}}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<th></th>
+						<th></th>
+						<th><button ng-click="discount()" class="btn btn-default">Apply Discount</button></th>
+						<td><input type="number" ng-model="discount_value"></td>
+						<td></td>
+					</tr>
+					<tr>
+						<th></th>
+						<th></th>
+						<th>Grand Total</th>
+						<td>{{ grandTotalOld | currency:"Rp ":0}}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<th></th>
+						<th style="text-align:right;line-height:2.5;">Payment Type:</th>
+						<th>
+
+							<select class="form-control" ng-model="PaymentType">
+								<option value="Cash">Cash</option>
+								<option value="Card">Card</option>
+								<option value="Paytm">Paytm</option>
+								</select>
+						</th>
+						<td><button class="btn btn-primary" ng-click="print();"><i class="fa fa-print"></i>Print</button></td>
+						<td></td>
+					</tr>
+				</table>
+
+
+				<!--<button class="btn btn-primary" ng-click="print()">Print</button>-->
+
+			</div>
+		</div>
+		<div class="row">
+
+			<!--<div class="col-md-6" ng-if="msg_prod">
+				<div class="alert alert-success" id="msg_prod">
+					<a href="javascript:void(0)" ng-click="close()">&times;</a>
+					<strong>Success!</strong> Transaction is completed.
+				</div>
+			</div>-->
+			<div class="col-md-6" ng-if="product_error">
+				<div class="alert alert-danger" id="product_error">
+					<a href="javascript:void(0)" ng-click="close()">&times;</a>
+					<strong>Failure! </strong>Product list with no data can not be printed.
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div id="print" class="visible-print-block" style="margin-top:0px;" >
+		<h3>Kelvin 77</h3>
+		<div>
+			<span style="text-align:left">Bill No: <span id="billId"></span></span> <span style="text-align:right; padding-left: 100px">Date: {{BillDate|date:'short'}}</span>
+		</div>
+		<div>----------------------------------------------------------</div>
+		<div>
+			<table>
+				<th style="text-align:left;">Item</th>
+				<th style="text-align:right">Quantity</th>
+				<th style="text-align:right">Price</th>
+				<th style="text-align:right">Amount</th>
+				<tr ng-repeat="selected in selectedProdcuts track by $index">
+					<td style="text-align:left">{{selected.product.split('(')[0]}}</td>
+					<td style="text-align:right">{{selected.quantity}}</td>
+					<td style="text-align:right">{{selected.price}}</td>
+					<td style="text-align:right">{{selected.subTotal}}</td>
+				</tr>
+			</table>
+			<div>----------------------------------------------------------</div>
+			<div>
+				<div style="text-align:left">Discount<span style="padding-left:185px;">{{  discount_value | currency:"Rp ":0}}</span></div>
+			</div>
+			<div></div>
+			<div>----------------------------------------------------------</div>
+			<div>
+				<div style="text-align:left">Total<span style="text-align:right; padding-left: 200px">{{ grandTotalOld | currency:"Rp ":0}}</span></div>
+			</div>
+			<div>----------------------------------------------------------</div>
+			<div style="text-align:left;">THANK YOU FOR 'VISIT' AGAIN</div>
+
+		</div>
+	 
+	     <div>----------------------------------------------------------</div>
+		<div>
+			<span style="text-align:left">Bill No: <span id="billId"></span></span> <span style="text-align:right; padding-left: 100px">Date: {{BillDate|date:'short'}}</span>
+		</div>
+		<div>----------------------------------------------------------</div>
+		<div>
+			<table>
+				<th style="text-align:left;">Item</th>
+				<th style="text-align:right">Quantity</th>
+				<th style="text-align:right">Price</th>
+				<th style="text-align:right">Amount</th>
+				<tr ng-repeat="selected in selectedProdcuts track by $index">
+					<td style="text-align:left">{{selected.product.split('(')[0]}}</td>
+					<td style="text-align:right">{{selected.quantity}}</td>
+					<td style="text-align:right">{{selected.price}}</td>
+					<td style="text-align:right">{{selected.subTotal}}</td>
+				</tr>
+			</table>
+			<div>----------------------------------------------------------</div>
+			<div>
+				<div style="text-align:left">Discount<span style="padding-left:185px;">{{  discount_value | currency:"Rp ":0}}</span></div>
+			</div>
+			<div></div>
+			<div>----------------------------------------------------------</div>
+			<div>
+				<div style="text-align:left">Total<span style="text-align:right; padding-left: 200px">{{ grandTotalOld | currency:"Rp ":0}}</span></div>
+			</div>
+			<div>----------------------------------------------------------</div>
+			<div style="text-align:left;">THANK YOU FOR 'VISIT' AGAIN</div>
+
+		</div>
+	</div>
+</div>

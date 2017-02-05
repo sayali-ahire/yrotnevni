@@ -1,0 +1,18 @@
+<div ng-controller="CartController" id="Print">
+    <h3>Kelvin 77</h3>
+</div>
+<div>------------------------------------------</div>
+<div>
+    <table>
+        <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Amount</th>
+        </tr>
+        <tr ng-repeat="selected in selectedProdcuts track by $index">
+            <td>{{selected.price}}</td>
+        </tr>
+
+    </table>
+</div>

@@ -1,0 +1,39 @@
+<div class="container" ng-controller="InventoryController">
+	<h1>Edit Product</h1>
+	<div ng-repeat="p in invdetail">
+		<!--{{ p.idproduk }}-->
+
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="">Inventory Name</label>
+						<input type="text" class="form-control" ng-model="p.inventory_name" placeholder="Inventory Name">
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="">Stock</label>
+						<input type="text" class="form-control" ng-change="calculate_staock(p,$index)" ng-model="p.stok" placeholder="Stock">
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="">Available Stock</label>
+						<input type="text" class="form-control" ng-model="p.available_stock"  placeholder="Available Stock">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<button class="btn btn-primary" ng-click="update(p)">Update</button>
+			<a class="btn btn-primary" href="http://localhost/inventoryApp/#/inventory">Back</a>
+		</div>
+		
+		<div class="col-md-6" ng-if="msg">
+			<div class="alert alert-success" id="msg">
+				<a href="javascript:void(0)" ng-click="close()">&times;</a>
+				<strong>Success! </strong>Product is updated successfully.
+			</div>
+		</div>
+	</div>

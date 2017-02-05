@@ -1,0 +1,41 @@
+<div class="container" ng-controller="CartController">
+	<h1>Edit Product</h1>
+	<div ng-repeat="p in produkdetail">
+		<!--{{ p.idproduk }}-->
+
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="">Inventory Name</label>
+						<input type="text" class="form-control" ng-model="p.nama_produk" placeholder="Product Name">
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="">Price</label>
+						<input type="text" class="form-control" ng-model="p.harga" placeholder="Price">
+					</div>
+				</div>
+				<div class="col-md-3 col-xs-3" style="padding-left:15px;">
+					<div class="form-group">
+						<label for="repeatSelect"> Select Base: </label>
+						<select  class="form-control" name="repeatSelect" id="repeatSelect" ng-model="p.idkategori"   >
+						  <option   ng-repeat="option in base"  value="{{option.id}}">{{option.inventory_name}}</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<button class="btn btn-primary" ng-click="update(p)">Update</button>
+			<a class="btn btn-primary" href="http://localhost/inventoryApp/#/product">Back</a>
+		</div>
+		
+		<div class="col-md-6" ng-if="msg">
+			<div class="alert alert-success" id="msg">
+				<a href="javascript:void(0)" ng-click="close()">&times;</a>
+				<strong>Success! </strong>Product is updated successfully.
+			</div>
+		</div>
+	</div>
